@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>F:\我的桌面\发布的网站\MyWeb</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/MyBBS.dll">
+      <publishTime>04/22/2014 21:19:58</publishTime>
+    </File>
+    <File Include="bin/NVelocity.dll">
+      <publishTime>03/06/2014 21:55:04</publishTime>
+    </File>
+    <File Include="CSS/bootstrap-theme.css">
+      <publishTime>04/17/2014 20:00:41</publishTime>
+    </File>
+    <File Include="CSS/bootstrap.css">
+      <publishTime>04/16/2014 20:57:56</publishTime>
+    </File>
+    <File Include="CSS/detailed.css">
+      <publishTime>04/17/2014 20:08:22</publishTime>
+    </File>
+    <File Include="CSS/nivo-slider.css">
+      <publishTime>04/16/2014 17:47:23</publishTime>
+    </File>
+    <File Include="CSS/personal.css">
+      <publishTime>03/30/2014 14:56:14</publishTime>
+    </File>
+    <File Include="CSS/shop.css">
+      <publishTime>04/12/2014 13:43:03</publishTime>
+    </File>
+    <File Include="detailed.ashx">
+      <publishTime>03/08/2014 11:16:26</publishTime>
+    </File>
+    <File Include="Donated.ashx">
+      <publishTime>03/11/2014 10:08:56</publishTime>
+    </File>
+    <File Include="gbtags.html_files/all.min.css">
+      <publishTime>03/22/2014 18:54:15</publishTime>
+    </File>
+    <File Include="gbtags.html_files/bootstrap-wysiwyg.js">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/bootstrap.min.js">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/gbtags.htm">
+      <publishTime>03/22/2014 19:16:05</publishTime>
+    </File>
+    <File Include="gbtags.html_files/index.css">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/jquery.hotkeys.js">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/jquery.min.js">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/jquery1.9.1.min.js">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/jresize.min.js">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/translate-32.png">
+      <publishTime>03/22/2014 18:10:46</publishTime>
+    </File>
+    <File Include="gbtags.html_files/translateelement.css">
+      <publishTime>03/22/2014 18:47:41</publishTime>
+    </File>
+    <File Include="guanli.ashx">
+      <publishTime>04/12/2014 20:22:48</publishTime>
+    </File>
+    <File Include="HTML/admin/admin.ashx">
+      <publishTime>04/15/2014 10:21:07</publishTime>
+    </File>
+    <File Include="HTML/admin/adminGoods.html">
+      <publishTime>04/20/2014 17:56:19</publishTime>
+    </File>
+    <File Include="HTML/admin/adminLogin.html">
+      <publishTime>04/22/2014 20:21:32</publishTime>
+    </File>
+    <File Include="HTML/admin/adminMenu.html">
+      <publishTime>04/15/2014 12:23:41</publishTime>
+    </File>
+    <File Include="HTML/admin/adminPerson.html">
+      <publishTime>04/20/2014 18:10:46</publishTime>
+    </File>
+    <File Include="HTML/admin/adminPublish.html">
+      <publishTime>04/20/2014 19:59:00</publishTime>
+    </File>
+    <File Include="HTML/detailed.html">
+      <publishTime>04/22/2014 20:59:27</publishTime>
+    </File>
+    <File Include="HTML/div.html">
+      <publishTime>03/27/2014 21:32:10</publishTime>
+    </File>
+    <File Include="HTML/Donated.html">
+      <publishTime>04/22/2014 20:32:37</publishTime>
+    </File>
+    <File Include="HTML/gbtags.html">
+      <publishTime>03/22/2014 21:45:09</publishTime>
+    </File>
+    <File Include="HTML/guanli.html">
+      <publishTime>04/13/2014 11:20:14</publishTime>
+    </File>
+    <File Include="HTML/guanligoods.html">
+      <publishTime>04/12/2014 19:52:24</publishTime>
+    </File>
+    <File Include="HTML/head.html">
+      <publishTime>03/23/2014 16:18:46</publishTime>
+    </File>
+    <File Include="HTML/HTML2/StartUser.html">
+      <publishTime>03/15/2014 14:53:08</publishTime>
+    </File>
+    <File Include="HTML/judge.html">
+      <publishTime>03/23/2014 16:37:12</publishTime>
+    </File>
+    <File Include="HTML/personalGoods.html">
+      <publishTime>04/22/2014 20:59:27</publishTime>
+    </File>
+    <File Include="HTML/personalMessage.html">
+      <publishTime>04/22/2014 21:18:29</publishTime>
+    </File>
+    <File Include="HTML/PersonalPage.html">
+      <publishTime>04/22/2014 21:18:05</publishTime>
+    </File>
+    <File Include="HTML/personalPage_SH.html">
+      <publishTime>04/22/2014 21:17:46</publishTime>
+    </File>
+    <File Include="HTML/Register.html">
+      <publishTime>04/22/2014 20:28:09</publishTime>
+    </File>
+    <File Include="HTML/Review.html">
+      <publishTime>04/22/2014 20:25:35</publishTime>
+    </File>
+    <File Include="HTML/search.html">
+      <publishTime>04/22/2014 20:25:16</publishTime>
+    </File>
+    <File Include="HTML/shop.html">
+      <publishTime>04/22/2014 20:58:39</publishTime>
+    </File>
+    <File Include="HTML/start.html">
+      <publishTime>04/22/2014 20:59:20</publishTime>
+    </File>
+    <File Include="HTML/test1.html">
+      <publishTime>03/09/2014 18:57:10</publishTime>
+    </File>
+    <File Include="images/arrows.png">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/background.png">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/bullets.png">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/loading.gif">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/nemo.jpg">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/shop_int1.png">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/shop_int2.png">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/slider.png">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/Thumbs.db">
+      <publishTime>04/18/2014 18:55:56</publishTime>
+    </File>
+    <File Include="images/toystory.jpg">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/up.jpg">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/walle.jpg">
+      <publishTime>04/16/2014 13:56:19</publishTime>
+    </File>
+    <File Include="images/图图3.png">
+      <publishTime>04/18/2014 20:16:27</publishTime>
+    </File>
+    <File Include="index.ashx">
+      <publishTime>03/06/2014 21:58:55</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>03/12/2014 18:46:36</publishTime>
+    </File>
+    <File Include="indexPaging.ashx">
+      <publishTime>04/08/2014 22:03:19</publishTime>
+    </File>
+    <File Include="JS/ajax.js">
+      <publishTime>04/17/2014 16:36:18</publishTime>
+    </File>
+    <File Include="JS/bootstrap.js">
+      <publishTime>03/22/2014 18:40:16</publishTime>
+    </File>
+    <File Include="JS/bootstrap.min.js">
+      <publishTime>04/07/2014 14:04:17</publishTime>
+    </File>
+    <File Include="JS/detailed.js">
+      <publishTime>04/22/2014 09:56:12</publishTime>
+    </File>
+    <File Include="JS/jquery-1.4.3.min.js">
+      <publishTime>04/16/2014 14:29:49</publishTime>
+    </File>
+    <File Include="JS/jquery-2.0.0.min.js">
+      <publishTime>03/22/2014 20:32:55</publishTime>
+    </File>
+    <File Include="JS/jquery.nivo.slider.pack.js">
+      <publishTime>04/16/2014 14:29:49</publishTime>
+    </File>
+    <File Include="LogIn.ashx">
+      <publishTime>03/14/2014 21:36:28</publishTime>
+    </File>
+    <File Include="NVelocity.dll">
+      <publishTime>03/06/2014 21:55:04</publishTime>
+    </File>
+    <File Include="PersonalPage.ashx">
+      <publishTime>03/23/2014 16:23:03</publishTime>
+    </File>
+    <File Include="personalPage/persoalMessage.ashx">
+      <publishTime>04/15/2014 13:36:35</publishTime>
+    </File>
+    <File Include="personalPage/personalGoods.ashx">
+      <publishTime>04/10/2014 21:22:19</publishTime>
+    </File>
+    <File Include="personalPage/personalPage_SH.ashx">
+      <publishTime>04/04/2014 21:25:14</publishTime>
+    </File>
+    <File Include="Publish.ashx">
+      <publishTime>03/19/2014 14:08:34</publishTime>
+    </File>
+    <File Include="Register.ashx">
+      <publishTime>03/08/2014 14:12:01</publishTime>
+    </File>
+    <File Include="Review.ashx">
+      <publishTime>03/27/2014 16:56:21</publishTime>
+    </File>
+    <File Include="search.ashx">
+      <publishTime>03/13/2014 14:36:34</publishTime>
+    </File>
+    <File Include="tup/22.png">
+      <publishTime>04/15/2014 20:06:34</publishTime>
+    </File>
+    <File Include="tup/2222.png">
+      <publishTime>04/15/2014 20:06:35</publishTime>
+    </File>
+    <File Include="tup/arrows.png">
+      <publishTime>03/14/2014 19:51:46</publishTime>
+    </File>
+    <File Include="tup/bg.jpg">
+      <publishTime>03/22/2014 21:51:28</publishTime>
+    </File>
+    <File Include="tup/Clipboard.png">
+      <publishTime>03/22/2014 19:02:31</publishTime>
+    </File>
+    <File Include="tup/Donated_index.png">
+      <publishTime>04/16/2014 17:36:38</publishTime>
+    </File>
+    <File Include="tup/do_logo.png">
+      <publishTime>04/12/2014 15:36:44</publishTime>
+    </File>
+    <File Include="tup/goodsIn.png">
+      <publishTime>04/15/2014 13:11:52</publishTime>
+    </File>
+    <File Include="tup/index_logo.jpg">
+      <publishTime>04/12/2014 11:08:47</publishTime>
+    </File>
+    <File Include="tup/jt.png">
+      <publishTime>03/15/2014 11:43:32</publishTime>
+    </File>
+    <File Include="tup/jt1.png">
+      <publishTime>04/11/2014 09:12:40</publishTime>
+    </File>
+    <File Include="tup/jt11.png">
+      <publishTime>04/11/2014 08:55:19</publishTime>
+    </File>
+    <File Include="tup/jt12.png">
+      <publishTime>04/11/2014 09:00:21</publishTime>
+    </File>
+    <File Include="tup/left.png">
+      <publishTime>04/08/2014 21:53:36</publishTime>
+    </File>
+    <File Include="tup/logo.png">
+      <publishTime>03/23/2014 15:50:18</publishTime>
+    </File>
+    <File Include="tup/Replace.jpg">
+      <publishTime>04/10/2014 18:26:25</publishTime>
+    </File>
+    <File Include="tup/return.png">
+      <publishTime>03/10/2014 12:25:04</publishTime>
+    </File>
+    <File Include="tup/right.png">
+      <publishTime>04/08/2014 21:53:36</publishTime>
+    </File>
+    <File Include="tup/shop_int1.png">
+      <publishTime>04/15/2014 21:54:54</publishTime>
+    </File>
+    <File Include="tup/shop_int2.png">
+      <publishTime>04/15/2014 21:54:53</publishTime>
+    </File>
+    <File Include="tup/shop_logo.jpg">
+      <publishTime>04/12/2014 11:03:30</publishTime>
+    </File>
+    <File Include="tup/ym.jpg">
+      <publishTime>03/10/2014 20:36:37</publishTime>
+    </File>
+    <File Include="tup/zj.jpg">
+      <publishTime>03/12/2014 19:41:09</publishTime>
+    </File>
+    <File Include="tup/管理.png">
+      <publishTime>04/12/2014 20:11:45</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/22/2014 19:29:13</publishTime>
+    </File>
+    <File Include="WebForm1.ashx">
+      <publishTime>04/01/2014 19:56:00</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

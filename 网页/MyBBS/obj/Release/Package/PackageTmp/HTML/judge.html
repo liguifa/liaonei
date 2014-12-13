@@ -1,0 +1,24 @@
+﻿
+       <!--网页登陆类别验证开始-->
+       #if(!$Data.state)
+<form action="../LogIn.ashx" class="form-inline"  method="post">
+              <div class="form-group">
+                  <input class="form-control" id="focusedInput" type="text" name="username" placeholder="输入账号"/>
+              </div>
+              <div class="form-group">
+                <input class="form-control" id="Text1" type="password" name="password" placeholder="忘记密码请联系管理员"/>
+              </div>
+                 
+              <button  type="submit" name="login" value="登陆" class="btn btn-default">  登录</button>
+                <button type="button" class="btn btn-default" onclick="window.open('Register.ashx?action=AddNew')">注册</button>
+ </form>
+       
+       #else
+
+      
+       <li class="username"><a href="../PersonalPage.ashx"> <strong>$Data.Username 欢迎您！</strong></a></li><li class="username" ><a href ="../LogIn.ashx?action=logout" ><strong>注销</strong></a></li>
+
+       #end
+       <!--网页登陆类别验证结束-->
+
+ 

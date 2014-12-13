@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <title>Register</title>
+     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.css" type="text/css" />
+ <script type="text/javascript" >
+     window.onload = function () {
+
+         var html = document.getElementById("html");
+         var x = screen.width;
+         var y = screen.height;
+         html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+         html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+         html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+         html.style.marginTop = "-" + (768 - y) / 2 + "px";
+
+     }
+ </script>       
+<style type="text/css">
+    body {
+        background-color: #F1F5FA;
+    }
+
+    .div1 {
+        width: 500px;
+        height: 50px;
+        margin: auto;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .div2 {
+        width: 500px;
+        height: auto;
+        margin: auto;
+        text-align: center;
+    }
+
+    td {
+        text-align: left;
+        color: rgb(131,131,131);
+    }
+
+    option {
+        text-align: center;
+        width: 160px;
+        height: 25px;
+    }
+
+    #sex {
+        margin-left: -60px;
+    }
+</style></head>
+
+<body>
+   
+    <div id="html" style="margin:auto">
+  <nav class="navbar navbar-inverse" role="navigation">
+   <ul class="nav nav-pills">
+  <li class="active"><a href="index.ashx"><strong>首页</strong></a></li>
+  <li><a href="index.ashx?action=shop"><strong>商品专区</strong></a></li>
+  <li><a href="Donated.ashx"><strong>捐赠专区</strong></a></li>
+       </ul>
+</nav>
+<div class="div1">
+<h1><strong style="font-family: 楷体";>请注册</strong></h1>
+</div>
+<div class="div2">
+    <form action="../Register.ashx" method="post">
+            <input type="hidden" name="Action" value="AddNew" />
+            <input type="hidden" name="Save" value="true" />
+                <table  align="center">
+                    <tbody> <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">用户名:</td><td><input onkeyup="value=value.replace(/[^\w\.\/]/ig,'')" class="form-control" name="Name"placeholder="" value=""  type="text"/></td><td><p font-color="red"></p>&nbsp;$Data.Name</td></tr>
+                    <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">密码:</td><td><input class="form-control" name="Pwd"placeholder="不低于六位" value="" type="password"/></td><td></td></tr>
+                    <tr><td  align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">确认密码:</td><td><input class="form-control" name="Rpwd" value="" type="password"/></td><td></td></tr>
+                        <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">QQ:</td><td><input  class="form-control" name="QQ"  type="text"/></td><td></td></tr>
+                         <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">电话:</td><td><input  class="form-control" name="Phone"  type="text"/></td><td></td></tr>
+                    <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">邮箱:</td><td><input class="form-control" name="Email" value="$Data.Email" type="text"/></td><td></td></tr>
+                    <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">学院:</td><td>
+                        <select class="form-control" name="College" color: #008080">
+                             #foreach($College in $Data.College)
+                                 <option  value="$College.ID">$College.College</option>
+                              #end
+                        </select>
+                     </td></tr>
+                    <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">年级:</td><td>
+                                  <select name="Grade" class="form-control">
+                                        #foreach($Grade in $Data.Grade)
+                                          <option  value="$Grade.ID">$Grade.Grade</option>
+                                         #end
+
+                                    </select>
+
+                                        </td></tr>
+                         <tr><td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">性别:</td><td><label class="radio" ><input type="radio" name="sex" id="optionsRadios1" value="男" checked />男</label></td><td><label class="radio"  id="sex"><input type="radio" name="sex" id="optionsRadios2" value="女" />女</label></td></tr>
+                <tr><td></td><td><button type="submit" class="btn btn-primary btn-lg btn-block">注册</button></td></tr>
+                </tbody>
+            </table> 
+    </form>
+</div>
+    <div class="tail">
+    <p>&copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br>请遵守国家法规</p>
+</div>
+</div>
+</body>
+
+</html>

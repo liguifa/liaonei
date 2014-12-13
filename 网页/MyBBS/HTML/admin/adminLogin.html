@@ -1,0 +1,41 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>admin</title>
+    <style>
+        body {
+            background-color:#b6ff00;
+        }
+        form {
+            width:240px;
+            height:110px;
+            margin:auto;
+            margin-top:200px;
+            background-color:#808080;
+            border:solid 2px #f7a207;
+        }
+        button {
+            padding:0px 110px;
+            margin-top:20px;
+            background-color:#1134d7;
+            border:solid 2px #ff6a00;
+        }
+        input{
+            border:solid 2px #f2451f;
+           
+        }
+    </style>
+</head>
+
+<body>
+<div id="login">
+ <form action="admin.ashx" method="post">
+用户名：<input type="text" name="amdin" value="" />
+密&nbsp;&nbsp;码：<input type="password" name="adminpassword" value="" />
+<input type="text" value="Login" name="request"style="display:none;"/>
+<button type="submit" >登录</button>
+ </form>
+</div>
+</body>
+</html>

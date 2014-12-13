@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>商品列表</title>
+    <script type="text/javascript" src="../../JS/ajax.js"></script>
+<style>
+    #div {
+        width:1350px;
+        margin:auto;
+        text-align:center;
+    }
+    body {
+        background:#F5F5F5;
+    }
+    table{
+        text-align:center;
+        border:solid 2px red;
+        margin:auto;
+    }
+    tr {
+        text-align:center;
+        border:solid 2px red;
+        border-color:blue;
+    }
+    th {
+        text-align:center;
+        border:double 2px;
+        border-color:blue;
+    }
+    td {
+        text-align:center;
+        border:double 2px;
+        border-color:blue;
+    }
+</style>
+    <script>
+        var ID = null;
+        var isOpenTr = false;
+        function Del(id)
+        {
+            if (confirm("你确定要删除吗？")) {
+                StartAjax("post", "admin.ashx", true, "request=Delete&table=Table_3&ID=" + id);
+                ID = id;
+            }
+        }
+        function CallbackSuccess()
+        {
+            var str = xmlHttpRequest.responseText;
+            var res = eval("(" + str + ")");
+            switch (res.Operation)
+            {
+                case "DEL":
+                    if (res.res = "true")
+                    {
+                        alert("删除成功！");
+                        document.getElementById("table").removeChild(document.getElementById(ID));
+                        
+                    }
+                    else
+                    {
+                        alert("网络错误！");
+                    }
+                    break;
+                case "EDIT":
+                    if(res.res="true")
+                    {
+                        alert("更改成功！");
+                        var input = document.getElementsByName("input");
+                        var id = document.getElementsByClassName(id);
+                        for (var i = 0; i < input; i++) {
+                            id[i + 1].innerHTML = input[i].value;
+                        }
+                        var tr = document.getElementsByClassName(ID);
+                        var tr_2 = document.getElementsByTagName("input");
+                        for(var i=1;i<tr_2.length;i++)
+                        {
+                            tr[i].innerHTML = tr_2[i-1].value;
+                        }
+                        document.getElementsByClassName(ID)[12].innerHTML = "";
+                        isOpenTr = false;
+                    }
+                    else
+                    {
+                        alert("更改失败！");
+                    }
+                    break;
+            }
+        }
+        function Edit(id,src)
+        {
+            if (!isOpenTr) {
+                var tr = document.getElementsByClassName(id);
+                tr[12].innerHTML = '<tr  id="NowData"><td>编辑</td><td><input  type="text" value="' + tr[1].innerHTML + '"/></td><td><input type="text" value="' + tr[2].innerHTML + '" /></td><td><input type="text" value="' + tr[3].innerHTML + '" /></td><td><input type="text"value="' + tr[4].innerHTML + '" /></td><td><input type="text" value="' + tr[5].innerHTML + '"/></td><td><input type="text" value="' + tr[6].innerHTML + '"/></td><td><input type="text" value="' + tr[7].innerHTML + '"/></td><td><input type="text" value="' + tr[8].innerHTML + '"/></td><td><input type="text"value="' + tr[9].innerHTML + '" /></td><td><input type="text" value="' + tr[10].innerHTML + '"/></td><td><input type="text" value="' + tr[11].innerHTML + '"/></td><td><a href="#" onclick="Save(' + id + ',\''+src+'\''+');">保存</a></td></tr>';
+                ID = id;
+                isOpenTr = true;
+            }
+            else {
+                if (confirm("你还有打开的项！是否放弃?"))
+                {
+                    document.getElementsByClassName(ID)[12].innerHTML = "";
+                    isOpenTr = false;
+                }
+            }
+        }
+        function Save(id,src)
+        {
+            var tr = document.getElementsByTagName("input");
+            StartAjax("post", "admin.ashx", true, "request=Edit&table=Table_3&num=13&ID=" + id + "&data0="+src+"&data1=" + tr[0].value + "&data2=" + tr[2].value + "&data3=" + tr[4].value + "&data4=" + tr[5].value + "&data5=" + tr[6].value + "&data6=" + tr[7].value + "&data7=" + tr[8].value + "&data8=" + tr[1].value + "&data9=" + tr[9].value + "&data10=" + tr[3].value + "&data11=" + tr[10].value);
+            
+        }
+    </script>
+</head>
+<body>
+    <div id="div">
+    <h1>商品列表</h1>
+<table>
+    
+    <thead>
+        <tr>
+            <th>ID</th><th>Title</th><th>Price</th><th>Introduction</th><th>Classification</th><th>Details</th><th>Username</th><th>Phone</th><th>QQ</th><th>Time</th><th>VIP</th><th>Donate</th><th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="table">
+        #foreach($p in $Data)
+        <tr id="$p.id"><td class="$p.id">$p.id</td><td class="$p.id">$p.Title</td><td class="$p.id">$p.Price</td><td class="$p.id">$p.Introduction</td><td class="$p.id">$p.Classification</td><td class="$p.id">$p.Details</td><td class="$p.id">$p.Username</td><td class="$p.id">$p.Phone</td><td class="$p.id">$p.QQ</td><td class="$p.id">$p.Time</td><td class="$p.id">$p.VIP</td><td class="$p.id">$p.Donate</td><td><a href="#" onclick='Edit("$p.id","$p.SRC");'>编辑</a>/<a href="#" onclick="Del($p.id)">删除</a></td></tr>
+        <tr class="$p.id"></tr>
+        #end;
+    </tbody>
+</table>
+        </div>
+</body>
+</html>

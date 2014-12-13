@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>商品专区</title>
+    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../css/bootstrap-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../css/shop.css" type="text/css" />
+<link rel="stylesheet" href="../css/nivo-slider.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="../js/jquery-1.4.3.min.js"></script>
+<script type="text/javascript" src="../js/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript">
+    $(window).load(function () {
+        $('#slider').nivoSlider();
+    });
+</script>
+    <script type="text/javascript">
+        window.onload = function ()
+        {
+                
+            var html = document.getElementById("html");
+           
+                var x = screen.width;
+                var y = screen.height;
+                if (x > 1366) {
+
+
+                    html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                    html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                    html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                    html.style.marginTop = "-" + (768 - y) / 2 + "px";
+                }
+                else {
+                    html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                    html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                    html.style.marginLeft = (1366 - x) / 2 + "px";
+                    html.style.marginTop = (768 - y) / 2 + "px";
+
+                   
+                }
+        }
+        function search_a() {
+            var search_text = document.getElementById("search_text");
+            var search_btn = document.getElementById("search_btn");
+            var url = "";
+            url = "search.ashx?action=" + search_text.value + "&search=true&page=1";
+            window.open(url);
+        }
+    </script>
+    <style>
+        #Gundong {
+            height:240px;
+            width:673px;
+            overflow:hidden;
+        }
+        #img1 {
+            float:left;
+        }
+        #img2 {
+          
+          float:left;
+
+        }
+    </style>
+</head>
+<body>
+<div id="html">
+<nav class="navbar navbar-inverse" role="navigation">
+   <ul class="nav nav-pills">
+  <li id="index"><a href="index.ashx"><strong>首页</strong></a></li>
+  <li id="shop" class="active"><a href="index.ashx?action=shop" ><strong>商品专区</strong></a></li>
+  <li id="donate"><a href="Donated.ashx" ><strong>捐赠专区</strong></a></li>
+
+#parse("judge.html")
+</ul>
+</nav>
+<div class="jumbotron">
+    <img src="../tup/shop_logo.jpg" />
+</div>
+
+
+<div id="html_body">
+    <h2 id="nav_head">全部商品分类</h2>
+    
+    <div id="search">
+        <form id="search_form">
+        <input type="text" name="search" id="search_text"/>
+        <a id="search_btn" href="#"  onclick="search_a();"><strong>搜一搜</strong></a>
+        </form>
+    </div>
+    <div id="release"><strong><a href="/personalPage/personalPage_SH.ashx">发布宝贝</a></strong><strong><a href="/personalPage/personalGoods.ashx">我的物品</a></strong></div>
+    <div class="nav_line"><hr style="margin:0px;border:0px;" /></div>
+    <div id="nav">
+        <ul>
+            <li><h4><strong><a href="search.ashx?action=1&search=false&page=1">闲置书籍</a></strong></h4></li>
+            <li><h4><strong><a href="search.ashx?action=2&search=false&page=1">闲置数码</a></strong></h4></li>
+            <li><h4><strong><a href="search.ashx?action=3&search=false&page=1">闲置电器</a></strong></h4></li>
+            <li><h4><strong><a href="search.ashx?action=4&search=false&page=1">闲置配饰</a></strong></h4></li>
+            <li><h4><strong><a href="search.ashx?action=5&search=false&page=1">闲置服饰</a></strong></h4></li>
+            <li id="tial_li"><h4><strong><a href="search.ashx?action=6&search=false&page=1">闲置其它</a></strong></h4></li>
+        </ul>
+    </div>
+    <div id="head_center">
+        <div id="slider" >
+               <img src="../images/shop_int1.png" alt=""  title="大家快来看啊"/>
+               <img src="../images/shop_int2.png" alt="" title="全新的校园O2O" />
+               <img src="../images/图图3.png" alt="" />
+            </div>
+    </div>
+    <div id="head_right">
+        <h3><strong>二手生活你我共享</strong></h3>
+        <a  href="personalPage/personalPage_SH.ashx">一键转让</a>
+    </div>
+    <div id="book" class="more">
+    <h4><strong>闲置书籍</strong></h4>
+    <a href="search.ashx?action=1&search=false&page=1">更多>></a>
+    <div class="nav_line line"><hr style="margin:0px;border:0px;" /></div>
+    </div>
+    #foreach($p in $Data.dt1)
+    <div class="picture">
+        <img src="$p.SRC"  onerror="javascript:this.src='/tup/Replace.jpg';" />
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+
+    <div class="more">
+    <h4><strong>闲置数码</strong></h4>
+    <a href="search.ashx?action=2&search=false&page=1">更多>></a>
+    <div class="nav_line line"><hr style="margin:0px;border:0px;" /></div>
+    </div>
+    #foreach($p in $Data.dt2)
+    <div class="picture">
+        <img src="$p.SRC"  onerror="javascript:this.src='/tup/Replace.jpg';"/>
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+
+    <div class="more">
+    <h4><strong>闲置电器</strong></h4>
+    <a href="search.ashx?action=3&search=false&page=1">更多>></a>
+    <div class="nav_line line"><hr style="margin:0px;border:0px;" /></div>
+    </div>
+    #foreach($p in $Data.dt3)
+    <div class="picture">
+        <img src="$p.SRC"  onerror="javascript:this.src='/tup/Replace.jpg';"/>
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+
+    <div class="more">
+    <h4><strong>闲置配饰</strong></h4>
+    <a href="search.ashx?action=4&search=false&page=1">更多>></a>
+    <div class="nav_line line"><hr style="margin:0px;border:0px;" /></div>
+    </div>
+    #foreach($p in $Data.dt4)
+    <div class="picture">
+        <img src="$p.SRC" onerror="javascript:this.src='/tup/Replace.jpg';" />
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+
+    <div class="more">
+    <h4><strong>闲置服饰</strong></h4>
+    <a href="search.ashx?action=5&search=false&page=1">更多>></a>
+    <div class="nav_line line"><hr style="margin:0px;border:0px;" /></div>
+    </div>
+    #foreach($p in $Data.dt5)
+    <div class="picture">
+        <img src="$p.SRC"  onerror="javascript:this.src='/tup/Replace.jpg';"/>
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+
+    
+    <div class="more">
+    <h4><strong>闲置其它</strong></h4>
+    <a href="search.ashx?action=6&search=false&page=1">更多>></a>
+    <div class="nav_line line"><hr style="margin:0px;border:0px;" /></div>
+    </div>
+   
+    #foreach($p in $Data.dt6)
+    <div class="picture">
+        <img src="$p.SRC" onerror="javascript:this.src='/tup/Replace.jpg';" />
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+
+</div>
+    <div class="tail">
+    <p>&copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br />请遵守国家法规</p>
+</div>
+    </div>
+</body>
+</html>

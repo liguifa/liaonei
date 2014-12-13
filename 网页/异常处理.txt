@@ -1,0 +1,7 @@
+错误代码	异常  
+0001		注册时数据库写入错误 
+0002		PersonalPage更新数据库时异常错误
+0003		PersonalPage数据库更新密码写入错误！
+0004		PersonalPage_SHe更新数据库时异常错误
+0005            indexPaging 异常请求错误！
+0006		personalGoogs.ashx修改物品信息错误！

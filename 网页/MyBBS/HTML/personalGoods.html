@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的物品</title>
+    <script type="text/javascript" src="../JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../JS/jquery-2.0.0.min.js"></script>
+    <link rel="stylesheet" href="../CSS/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../CSS/bootstrap-theme.css" type="text/css" />
+    <link rel="Stylesheet" href="../CSS/personal.css" type="text/css" />
+    <script type="text/javascript" src="../JS/ajax.js"></script>
+    <script>
+        window.onload = function ()
+        {
+            
+            if (x > 1366) {
+
+
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            }
+            else {
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = (1366 - x) / 2 + "px";
+                html.style.marginTop = (768 - y) / 2 + "px";
+
+
+            }
+        }
+    </script>
+    <style>
+       
+
+        .goods {
+            width: 900px;
+
+            margin: auto;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        td {
+            padding: 0 20px;
+        }
+
+        table {
+            margin: auto;
+        }
+
+        #Reply {
+            width: 800px;
+            height: 350px;
+            z-index: 1000;
+            display: none;
+            margin: auto;
+            filter: alpha(opacity=100);
+            opacity: 1;
+        }
+
+        .inReply {
+            margin: auto;
+            margin-top: 30px;
+        }
+        .change {
+        margin:auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="html">
+    <div class="change">
+        <div class="img">
+            <img id="LOGO" src="../tup/logo.png" alt="..." />
+            <h1 id="H1">我的个人中心</h1>
+            <h2 id="H3">您好， $Data.Username!</h2>
+        </div>
+        <br />
+        <div id="dh">
+            <ul class="nav nav-tabs dhbg">
+                <li><a href="../index.ashx">首页</a></li>
+                <li><a href="../index.ashx?action=shop">商品专区</a></li>
+                <li><a href="../Donated.ashx">捐赠专区</a></li>
+                <li><a href="../PersonalPage.ashx">个人资料</a></li>
+                <li><a href="../personalPage/personalPage_SH.ashx">发布商品</a></li>
+                <li class="active"><a href="#">我的二手</a></li>
+                <li><a href="../personalPage/persoalMessage.ashx">我的消息</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+    
+        <div class="goods">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <td>物品名称</td>
+                        <td>价格</td>
+                        <td>简介</td>
+                        <td>phone</td>
+                        <td>QQ</td>
+                        <td>时间</td>
+                        <td>编辑</td>
+                        <td>删除</td>
+
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    #foreach($p in $Data.dt)
+                            <tr class="flag" id="$p.id">
+                                <td><a class="$p.id" href="../detailed.ashx?action=detailed&ID=$p.id">$p.Title</a></td>
+                                <td class="$p.id">$p.Price</td>
+                                <td class="$p.id">$p.Introduction</td>
+                                <td class="$p.id">$p.Phone</td>
+
+                                <td class="$p.id">$p.QQ</td>
+                                <td class="$p.id" style="display: none">$p.Details</td>
+                                <td>$p.Time</td>
+                                <td class="$p.id">
+                                    <button type="button" id="edit" class="btn  btn-default" onclick='Reply("$p.id");' value="$p.id">编辑</button></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" onclick='del("$p.id")'>删除</button></td>
+                            </tr>
+                    #end
+              
+                </tbody>
+            </table>
+            <div id="add"></div>
+             </div>
+            <div class="tail">
+                <p>
+                    &copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br />
+                    请遵守国家法规
+                </p>
+            </div>
+            <div id="Coverage" onclick="Close();">
+            </div>
+            <div id="Reply">
+                <div class="inReply">
+                    <form action="../personalPage/personalGoods.ashx " method="post">
+                        <table>
+                            <tr>
+                                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">名称：</td>
+                                <td>
+
+                                    <div class="col-sm-10">
+                                        <input id="name" name="title" name="productName" class="form-control" placeholder="name" onchange="txtCtrl(this)" />
+                                    </div>
+
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">价格(元)：</td>
+                                <td>
+                                    <div class="col-sm-10">
+                                        <input id="price" class="form-control" name="price" onchange="priceCtrl(this)" placeholder="price" />
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">简介：</td>
+                                <td>
+                                    <div class="col-sm-10">
+                                        <input id="intro" class="form-control" name="introduction" onchange="intCtrl(this)" placeholder="introduction" />
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">QQ：</td>
+                                <td>
+                                    <div class="col-sm-10">
+                                        <input id="QQ" class="form-control" name="qq" onchange="intCtrl(this)" placeholder="introduction" />
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">Phone：</td>
+                                <td>
+                                    <div class="col-sm-10">
+                                        <input id="phone" class="form-control" name="phone" onchange="intCtrl(this)" placeholder="phone" />
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">详情</td>
+                                <td>
+                                    <div class="col-sm-10">
+                                        <textarea id="txt" name="details" class="form-control" name="details" rows="3" onchange="inputCtrl(this)" placeholder=""></textarea>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+
+                        </table>
+                        <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal" onclick="Close();">关闭</button>
+                            <button type="submit" id="submit" name="submit" class="btn btn-primary">保存修改</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+
+   
+
+    <script>
+
+        var flag = document.getElementsByClassName("flag");
+        if (flag.length == 0) {
+            document.getElementById("add").innerHTML = "<h1>您还没有发布任何商品呢</h1>";
+        }
+        function Reply(id) {
+            var Coverage = document.getElementById("Coverage");
+            var WIDTH = screen.width;
+            var HEIGHT = screen.height;
+            var Reply = document.getElementById("Reply");
+
+            Coverage.style.Width = document.body.scrollWidth + "px";
+            Coverage.style.height = document.body.scrollHeight + "px";
+            Coverage.style.background = "#333333";
+            Coverage.style.display = "block";
+            Reply.style.top = document.body.scrollTop + ((parseInt(screen.height) - 500) / 2) + "px";
+            Reply.style.left = document.body.scrollLeft + ((parseInt(screen.width) - 800) / 2) + "px";
+            var className = document.getElementsByClassName(id);
+            document.getElementById("name").value = className[0].innerHTML;
+            document.getElementById("price").value = className[1].innerHTML;
+            document.getElementById("intro").value = className[2].innerHTML;
+            document.getElementById("QQ").value = className[4].innerHTML;
+            document.getElementById("phone").value = className[3].innerHTML;
+            document.getElementById("txt").value = className[5].innerHTML;
+            document.getElementById("submit").value = id;
+            Reply.style.display = "block";
+
+
+        }
+
+
+        function Close() {
+            var Reply = document.getElementById("Reply");
+            Reply.style.display = "none";
+
+            var Coverage = document.getElementById("Coverage");
+            Coverage.style.display = "none";
+
+        }
+        var goodsid = null;
+        function del(id) {
+            var del=confirm("确定要删除吗？");
+            if (del) {
+                StartAjax("post", "personalGoods.ashx", true, "isDel=true&goodsId=" + id);
+                goodsid = id;
+            }
+
+        }
+        
+        function CallbackSuccess() {
+            var back = xmlHttpRequest.responseText;
+            var a = eval("(" + back + ")");
+            if (a.back == "ok") {
+                var list = document.getElementById("tbody");
+                list.removeChild(document.getElementById(goodsid));
+                alert("删除成功！");
+            }
+            else {
+                alert("未知错误！");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

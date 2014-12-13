@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>个人中心</title>
+
+    <script type="text/javascript" src="../JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../JS/jquery-2.0.0.min.js"></script>
+    <link rel="stylesheet" href="../CSS/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../CSS/bootstrap-theme.css" type="text/css" />
+    <link rel="Stylesheet" href="../CSS/personal.css" type="text/css" />
+    <script type="text/javascript" src="../JS/ajax.js"></script>
+    <script type="text/javascript">
+        var time = null;
+        var i = 1;
+        window.onload = function ()
+        {
+           
+            if (x > 1366) {
+
+
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            }
+            else {
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = (1366 - x) / 2 + "px";
+                html.style.marginTop = (768 - y) / 2 + "px";
+
+
+            }
+        }
+        function Reply() {
+            var Coverage = document.getElementById("Coverage");
+
+            var Reply = document.getElementById("Reply");
+
+            Coverage.style.Width = document.body.scrollWidth + "px";
+            Coverage.style.height = document.body.scrollHeight + "px";
+            Coverage.style.background = "#333333";
+            Coverage.style.display = "block";
+            Reply.style.top = document.body.scrollTop - 300 + "px";
+            Reply.style.left = document.body.scrollLeft + 420 + "px";
+
+            Reply.style.display = "block";
+            i = 1;
+            time = setInterval("move()", 10);
+
+
+        }
+
+        function move() {
+            var Reply = document.getElementById("Reply");
+            Reply.style.top = document.body.scrollTop - 300 + i + "px";
+            i = i + 20;
+            if (i >= 450) {
+                clearInterval(time);
+                i = 1;
+            }
+        }
+        function Close() {
+            var Reply = document.getElementById("Reply");
+            Reply.style.display = "none";
+            var Reply = document.getElementById("Reply2");
+            Reply.style.display = "none";
+            var Coverage = document.getElementById("Coverage");
+            Coverage.style.display = "none";
+
+        }
+        function Reply2() {
+            var Coverage = document.getElementById("Coverage");
+
+            var Reply = document.getElementById("Reply2");
+
+            Coverage.style.Width = document.body.scrollWidth + "px";
+            Coverage.style.height = document.body.scrollHeight + "px";
+            Coverage.style.background = "#333333";
+            Coverage.style.display = "block";
+            Reply.style.top = document.body.scrollTop - 300 + "px";
+            Reply.style.left = document.body.scrollLeft + 420 + "px";
+
+            Reply.style.display = "block";
+            i = 1;
+            time = setInterval("move2()", 10);
+
+
+        }
+
+        function move2() {
+            var Reply = document.getElementById("Reply2");
+            Reply.style.top = document.body.scrollTop - 300 + i + "px";
+            i = i + 20;
+            if (i >= 450) {
+                clearInterval(time);
+                i = 1;
+            }
+        }
+        function Xiugai() {
+            var now = document.getElementById("Now").value;
+            var new1 = document.getElementById("New").value;
+            var rnew = document.getElementById("RNew").value;
+
+            StartAjax("post", "PersonalPage.ashx", true, "submit=change&NowPwd=" + now + "&NewPwd=" + new1 + "&RNewPwd=" + rnew);
+        }
+        function CallbackSuccess() {
+            var string = xmlHttpRequest.responseText;
+            var str = eval("(" + string + ")");
+            switch (str.ok) {
+                case "1": alert("修改成功！"); Close(); break;
+                case "2": alert("密码不少于6位！"); break;
+                case "3": alert("当前密码错误！"); break;
+                case "4": alert("两次输入的密码不一致！"); break;
+                default: alert("未知错误！未确定是否成功！"); break;
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div id="html" class="bigBox" style="margin:auto">
+    <div class="change">
+        <div class="img">
+            <img id="LOGO" src="../tup/logo.png" alt="..." />
+            <h1 id="H1">我的个人中心</h1>
+            <h2 id="H3">您好， $Data.Username!</h2>
+        </div>
+        <br />
+        <div id="dh">
+           <ul class="nav nav-tabs dhbg">
+                <li><a href="../index.ashx">首页</a></li>
+                <li><a href="../index.ashx?action=shop">商品专区</a></li>
+                <li><a href="../Donated.ashx">捐赠专区</a></li>
+                <li class="active"><a href="../PersonalPage.ashx">个人资料</a></li>
+                <li><a href="../personalPage/personalPage_SH.ashx">发布商品</a></li>
+                <li><a href="../personalPage/personalGoods.ashx">我的二手</a></li>
+                <li><a href="../personalPage/persoalMessage.ashx">我的消息</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <div class="pad"></div>
+    <div class="bd">
+        <div class="content_left">
+            <div class="box">
+                <div class="banner">
+                    <div class="title1">&nbsp;</div>
+                    <div class="title2">&nbsp;</div>
+                </div>
+
+
+
+                <div class="contaner_left">
+                    <div class="topic">账户信息</div>
+                </div>
+                <div class="contaner_right">
+                    <div class="cor" style="font-family: Comic Sans ;">
+                        <br />
+                        <h3>&nbsp;&nbsp;&nbsp;账户：<strong>$Data.Username</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn  btn-success" onclick="Reply2();">修改密码</button><br />
+                            <br />
+                        </h3>
+                        #if($Data.vip=="1")
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; VIP：是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布次数：$Data.pubNum </p>
+                        #else
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; VIP：否&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布次数：$Data.pubNum </p>
+                       #end
+                         </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content_left">
+            <div class="box">
+                <div class="banner">
+                    <div class="title1">&nbsp;</div>
+                    <div class="title2">&nbsp;</div>
+                </div>
+
+
+
+                <div class="contaner_left">
+                    <div class="topic">个人资料</div>
+                </div>
+                <div class="contaner_right">
+                    <div class="corr">
+                        <table class="table table-bordered">
+
+                            <tr>
+                                <td>所属学院：</td>
+                                <td>$Data.dtCollege</td>
+                                <td>年级：</td>
+                                <td>$Data.dtGrade</td>
+
+                            </tr>
+                            <tr>
+                                <td>QQ：</td>
+                                <td>$Data.QQ</td>
+                                <td>手机：</td>
+                                <td>$Data.Phone</td>
+
+                            </tr>
+                            <tr>
+                                <td>邮箱：</td>
+                                <td>$Data.Email</td>
+                                <td>性别：</td>
+                                <td>$Data.Sex</td>
+
+                            </tr>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="butt">
+        <button type="button" class="btn btn-primary btn-lg btn-block" onclick="Reply();">修改个人信息</button>
+
+    </div>
+
+    <div class="tail">
+        <p>
+            &copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br />
+            请遵守国家法规
+        </p>
+    </div>
+
+
+    <div id="Coverage" onclick="Close();">
+    </div>
+    <div id="Reply" class=" fade in" onclick="fous_R();">
+        <div class="headpading">
+            <form action="../PersonalPage.ashx" method="post">
+
+                <table align="center">
+                    <tbody>
+                        <tr>
+                            <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">邮箱:</td>
+                            <td>
+                                <input class="form-control" name="Email" value="$Data.Email" type="text" /></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">手机:</td>
+                            <td>
+                                <input class="form-control" name="Phone" value="$Data.Phone" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">QQ:</td>
+                            <td>
+                                <input class="form-control" name="QQ" value="$Data.QQ" type="text" /></td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">学院:</td>
+                            <td>
+                                <select class="form-control" name="College">
+                                    #foreach($College in $Data.College)
+                                 <option value="$College.ID">$College.College</option>
+                                    #end
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">年级:</td>
+                            <td>
+                                <select name="Grade">
+                                    #foreach($Grade in $Data.Grade)
+                                          <option value="$Grade.ID">$Grade.Grade</option>
+                                    #end
+
+                                </select>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal" onclick="Close();">关闭</button>
+                    <button type="submit" name="submit" class="btn btn-primary" value="save">保存修改</button>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+    <div id="Reply2" class=" fade in" onclick="fous_R();">
+        <div class="headpading"></div>
+        <table align="center">
+            <tr>
+                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">旧密码:</td>
+                <td>
+                    <input id="Now" class="form-control" name="NowPwd" value="" type="password" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">新密码:</td>
+                <td>
+                    <input id="New" class="form-control" name="NewPwd" value="" type="password" /></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td align="left" style="font-family: 楷体; font-size: large; font-weight: bolder; color: #008080">重复密码:</td>
+                <td>
+                    <input id="RNew" class="form-control" name="RNewPwd" value="" type="password" /></td>
+                <td></td>
+            </tr>
+        </table>
+        <div class="modal-footer">
+            <button type="button" class="btn" data-dismiss="modal" onclick="Close();">放弃</button>
+            <button type="submit" name="submitpwd" class="btn btn-primary" value="save" onclick="Xiugai();">确定修改</button>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,317 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../JS/jquery-2.0.0.min.js"></script>
+    <link rel="stylesheet" href="../CSS/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../CSS/bootstrap-theme.css" type="text/css" />
+    <link rel="Stylesheet" href="../CSS/personal.css" type="text/css" />
+    <script type="text/javascript" src="../JS/ajax.js"></script>
+    <script>
+        window.onload = function () {
+            
+            if (x > 1366) {
+
+
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            }
+            else {
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = (1366 - x) / 2 + "px";
+                html.style.marginTop = (768 - y) / 2 + "px";
+
+
+            }
+        }
+    </script>
+    <style>
+        .bigBox {
+            width: 800px;
+            margin: auto;
+            margin-top: 40px;
+        }
+
+        #result {
+            width: 324px;
+            height: 284px;
+            margin: auto;
+        }
+
+        .thumbnail {
+            width: 344px;
+        }
+
+
+        input {
+            vertical-align: middle;
+            margin: 10px;
+            padding: 0px;
+        }
+
+        .file-box {
+            position: relative;
+            width: 340px;
+        }
+
+        .file {
+            position: absolute;
+            top: 0;
+            right: 80px;
+            height: 40px;
+            filter: alpha(opacity:0);
+            opacity: 0;
+            width: 300px;
+        }
+
+        .left {
+            width: 400px;
+            margin-top: 17px;
+            float: left;
+        }
+
+        .right {
+            width: 400px;
+            height: 400px;
+            float: right;
+        }
+
+        #txt {
+            width: 304px;
+            height: 60px;
+            margin-left: 10px;
+        }
+
+        .button {
+            margin: auto;
+            margin-top: 30px;
+        }
+
+        #jz {
+            margin-left: -120px;
+        }
+
+        #bjz {
+            margin-left: 100px;
+        }
+
+        #class {
+            margin-left: 10px;
+        }
+
+        #progress {
+            width: 1100px;
+            height: 20px;
+            margin: auto;
+            position: relative;
+            top: 300px;
+        }
+    </style>
+
+</head>
+<body><div id="html" class="bigbigBox" style="margin:auto">
+    <div class="change">
+        <div class="img">
+            <img id="LOGO" src="../tup/logo.png" alt="..." />
+            <h1 id="H1">发布商品</h1>
+            <h2 id="H3">您好， $Data.Username!</h2>
+        </div>
+        <br />
+        <div id="dh">
+            <ul class="nav nav-tabs dhbg">
+                <li><a href="../index.ashx">首页</a></li>
+                <li><a href="../index.ashx?action=shop">商品专区</a></li>
+                <li><a href="../Donated.ashx">捐赠专区</a></li>
+                <li><a href="../PersonalPage.ashx">个人资料</a></li>
+                <li  class="active"><a href="../personalPage/personalPage_SH.ashx">发布商品</a></li>
+                <li><a href="../personalPage/personalGoods.ashx">我的二手</a></li>
+                <li><a href="../personalPage/persoalMessage.ashx">我的消息</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+     
+    <div class="bigBox">
+        <form action="../personalPage/personalPage_SH.ashx" method="post" enctype="multipart/form-data">
+            <div class="left">
+
+
+                <div class="thumbnail">
+                    <div id="result"></div>
+                </div>
+                <div class="file-box">
+                    <label>请选择一个图片：</label>
+                    <input type='button' class='btn btn-info' value='选择文件' />
+                    <input type="file" name="ProductImage" class="file" id="file_input" />
+
+
+                </div>
+
+            </div>
+            <div class="right">
+                <table>
+                    <tr>
+                        <td>名称：</td>
+                        <td>
+
+                            <div class="col-sm-10">
+                                <input name="productName" class="form-control" placeholder="name" onchange="txtCtrl(this)"/>
+                            </div>
+
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>价格(元)：</td>
+                        <td>
+                            <div class="col-sm-10">
+                                <input id="price" class="form-control" name="price" onchange="priceCtrl(this)" placeholder="price" />
+                            </div>
+                        </td><td></td>
+                    </tr>
+                    <tr>
+                        <td>简介：</td>
+                        <td>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="introduction"onchange="intCtrl(this)" placeholder="introduction" />
+                            </div>
+                        </td><td></td>
+                    </tr>
+                    <tr>
+                        <td>详情</td>
+                        <td>
+                            <div class="col-sm-10">
+                                <textarea id="txt" class="form-control" name="details" rows="3"onchange="inputCtrl(this)" placeholder="联系方式需到个人中心修改"></textarea>
+                            </div>
+                        </td><td></td>
+                    </tr>
+                     <tr>
+                        <td>类别</td>
+                        <td>
+                            <div class="col-sm-10">
+                                 <select id="class" name="classification" class="form-control"  color: #008080">
+                                      <option  value="6">其他</option>
+                                     <option  value="1">书籍</option>
+                                     <option  value="2">数码</option>
+                                     <option  value="3">电器</option>
+                                     <option  value="4">配饰</option>
+                                     <option  value="5">服饰</option>
+                                   </select>
+                            </div>
+                        </td><td></td>
+                    </tr>
+                    <tr>
+                        <td> </td>
+                        <td> <label class="radio" id="bjz">
+                                <input type="radio" name="detailed" id="optionsRadios2" value="0" checked="checked" onclick="ableInput()"/>不捐赠</label> 
+                            </td>
+                        <td><label class="radio"  id="jz">
+                                <input type="radio" name="detailed" id="Radio2" value="1" onclick="disableInput()" />捐赠</label></td>
+                    </tr>
+                    
+                </table>
+                <div class="button">
+
+                    <button type="submit" onclick="Reply();"  class="btn btn-success btn-lg btn-block active"disabled="disabled" id="submit" name="save" value="save">发布</button>
+                </div>
+
+
+            </div>
+        </form>
+    </div>
+   
+    <div id="Coverage" >
+        <div class="progress progress-striped active" id="progress" style="display:none; z-index:1000; ">
+  <div class="progress-bar"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width:0px">
+   
+  </div>
+
+     </div>
+    </div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var result = document.getElementById("result");
+    var input = document.getElementById("file_input");
+
+    if (typeof FileReader === 'undefined') {
+        result.innerHTML = '<img id="result" src="' + input.value + '" alt=""/>';
+        //input.setAttribute('disabled', 'disabled');
+    } else {
+        input.addEventListener('change', readFile, false);
+    }
+    function txtCtrl(txtMax) {
+        if (txtMax.value.length > 10) {
+            alert("长度不超过10个字！");
+        }
+
+
+    } function priceCtrl(max) {
+        if (max.value.length > 10) {
+            alert("长度不超过10位！");
+        }
+
+    } function intCtrl(intMax) {
+        if (intMax.value.length > 20) {
+            alert("长度不超过20个字！");
+        }
+    } function inputCtrl(inputMax) {
+        if (inputMax.value.length > 400) {
+            alert("长度不超过400个字！");
+        }
+    }
+    function readFile() {
+
+
+        var file = this.files[0];
+
+        if (!/image\/\w+/.test(file.type)) {
+            alert("请确保文件为图像类型");
+            return false;
+        }
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function (e) {
+            document.getElementById("submit").classList.remove("active");
+            document.getElementById("submit").disabled = false;
+            result.innerHTML = '<img id="result" src="' + this.result + '" alt=""/>';
+
+
+        }
+    }
+    var price;
+    function disableInput() {
+        price = document.getElementById("price").value
+        document.getElementById("price").disabled = true;
+        document.getElementById("price").value = "0";
+    } function ableInput() {
+
+        document.getElementById("price").disabled = false;
+        document.getElementById("price").value = price;
+    } function Reply() {
+        var Coverage = document.getElementById("Coverage");
+
+        var progress = document.getElementById("progress");
+
+        Coverage.style.Width = document.body.scrollWidth + "px";
+        Coverage.style.height = document.body.scrollHeight + "px";
+        Coverage.style.background = "#333333";
+        Coverage.style.display = "block";
+        progress.style.display = "block";
+        var progres = document.getElementsByClassName("progress-bar");
+
+
+        progres[0].style.width = "100%";
+
+
+    }
+</script>
+

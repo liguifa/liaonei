@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>商品详情</title>
+
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.css" type="text/css" />
+    <link rel="stylesheet" href="/css/detailed.css" type="text/css" />
+    <script type="text/javascript" src="/JS/ajax.js"></script>
+     <script type="text/javascript" src="/JS/detailed.js"></script>
+    <script type="text/javascript">
+        window.onload = function ()
+        {
+           
+            if (x > 1366) {
+
+
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            }
+            else {
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = (1366 - x) / 2 + "px";
+                html.style.marginTop = (768 - y) / 2 + "px";
+
+
+            }
+            if (!$Data.islogin)
+                document.getElementById("publish_text").disabled="none";
+            draw();
+
+            document.getElementById("Reply").onmousewheel = function weel(e)
+            {
+                var sl;
+                e = e || window.event;
+                if (navigator.userAgent.toLowerCase().indexOf('msie') >= 0) {
+                    event.returnValue = false;
+                } else {
+                    e.preventDefault();
+                };
+                if (e.wheelDelta) {
+                    sl = e.wheelDelta;
+                } else if (e.detail) {
+                    sl = -e.detail;
+                };
+                if (sl < 0) {
+                    if (parseInt(document.getElementById("div").style.marginTop) + parseInt(document.getElementById("div").offsetHeight) > 340) {
+                        document.getElementById("div").style.marginTop = (parseInt(document.getElementById("div").style.marginTop) - 10) + "px";
+                        document.getElementById("speed_div").style.marginTop =parseInt( (parseInt(document.getElementById("speed_div").style.marginTop) + parseInt((381 - parseInt(document.getElementById("speed_div").offsetHeight)) * 10) / (document.getElementById("div").offsetHeight-381))) + "px";
+                    }
+                } else {
+                    if (parseInt(document.getElementById("div").style.marginTop) < 0) {
+                        document.getElementById("div").style.marginTop = (parseInt(document.getElementById("div").style.marginTop) + 10) + "px";
+                        document.getElementById("speed_div").style.marginTop =parseInt ((parseInt(document.getElementById("speed_div").style.marginTop) - parseInt((381 - parseInt(document.getElementById("speed_div").offsetHeight)) * 10) / (document.getElementById("div").offsetHeight - 381))) + "px";
+                    }
+                };
+                if (navigator.userAgent.toLowerCase().indexOf('firefox') >= 0) {
+                    //firefox支持onmousewheel
+                    addEventListener('DOMMouseScroll', function (e) {
+                        var obj = e.target;
+                        var onmousewheel;
+                        while (obj) {
+                            onmousewheel = obj.getAttribute('onmousewheel') || obj.onmousewheel;
+                            if (onmousewheel) break;
+                            if (obj.tagName == 'BODY') break;
+                            obj = obj.parentNode;
+                        };
+                        if (onmousewheel) {
+                            if (e.preventDefault) e.preventDefault();
+                            e.returnValue = false; //禁止页面滚动
+                            if (typeof obj.onmousewheel != 'function') {
+                                //将onmousewheel转换成function
+                                eval('window._tmpFun = function(event){' + onmousewheel + '}');
+                                obj.onmousewheel = window._tmpFun;
+                                window._tmpFun = null;
+                            };
+                            // 不直接执行是因为若onmousewheel(e)运行时间较长的话，会导致锁定滚动失效，使用setTimeout可避免
+                            setTimeout(function () {
+                                obj.onmousewheel(e);
+                            },
+                            1);
+                        };
+                    },
+                    false);
+                };
+            }
+        }
+        function draw()
+        {
+            var c = document.getElementsByClassName("can");
+            for (var i = 0; i < c.length; i++) {
+                var cxt = c[i].getContext("2d");
+                cxt.fillStyle = "#9DCEDF";
+                cxt.beginPath();
+                cxt.arc(50, 50, 48, 0, Math.PI * 2, true);
+                cxt.closePath();
+                cxt.fill();
+
+                cxt.fillStyle = "#A8DCEE";
+                cxt.moveTo(20, 64);
+                cxt.lineTo(80, 64);
+                cxt.lineTo(80, 66);
+                cxt.lineTo(20, 66);
+                cxt.closePath();
+                cxt.fill();
+
+                var Year = c[i].title.substring(0, 4);
+                var Month = c[i].title.substring(6, 8);
+                var Day = c[i].title.substring(8, 10);
+
+                switch (Month) {
+
+                    case "1-": Month = "January"; break;
+                    case "2-": Month = "February"; break;
+                    case "3-": Month = "March"; break;
+                    case "4-": Month = "April"; break;
+                    case "5-": Month = "May"; break;
+                    case "6-": Month = "June"; break;
+                    case "7-": Month = "July"; break;
+                    case "8-": Month = "August"; break;
+                    case "9-": Month = "September"; break;
+                    case "10": Month = "October"; break;
+                    case "11": Month = "November"; break;
+                    case "12": Month = "December"; break;
+                }
+
+                cxt.font = "20px Times New Roman";
+                cxt.fillStyle = "#000"
+                cxt.fillText(Year, 30, 80);
+
+                cxt.font = "40px Times New Roman";
+                cxt.fillStyle = "#000"
+                cxt.fillText(Day, 30, 60);
+
+                cxt.font = "20px Times New Roman";
+                cxt.fillStyle = "#000"
+                cxt.fillText(Month, 27, 30);
+            }
+        }
+       
+    </script>
+</head>
+<body id="b">
+    <div id="html" style="width:1366px;margin:auto">
+    <nav class="navbar navbar-inverse" role="navigation" style="background:#F5F5F5;">
+        <div id="head">
+            <div id="return"><a href="javascript:history.go(-1);">
+                <img class="btn_return" src="/tup/jt1.png" /></a></div>
+           <div style="margin:auto"><img src="../tup/2222.png" /></div>
+        </div>
+    </nav>
+
+    <div id="main">
+        <div class="row">
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="$Data.data.SRC" alt="..."  onerror="javascript:this.src='/tup/Replace.jpg';"/>
+                    <div class="caption">
+                        <p>
+                            <button type="button" class="btn btn-primary btn-lg btn-block" onclick="window.location.href='Review.ashx?ID=$Data.data.id&pag=1'">看看评价</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="title">
+            <ul id="list">
+                <li>
+                    <h3 class="title_h">名&nbsp;&nbsp;&nbsp;&nbsp;称：$Data.data.Title</h3>
+                </li>
+                <li>
+                    <h3 class="title_h">价&nbsp;&nbsp;&nbsp;&nbsp;格：￥ $Data.data.Price</h3>
+                </li>
+                <li>
+                    <h3 class="title_h">发布人：$Data.data.Username</h3>
+                </li>
+                <li>
+                    <h3 class="title_h">手机号：$Data.data.Phone</h3>
+                </li>
+                <li>
+                    <h3 class="title_h">Q&nbsp;&nbsp;&nbsp;&nbsp;Q：$Data.data.QQ</h3>
+                </li>
+                <li>
+                    <h3 class="title_h">日&nbsp;&nbsp;&nbsp;&nbsp;期：$Data.data.Time</h3>
+                </li>
+                <li>
+                    <h3 class="title_h">简&nbsp;&nbsp;&nbsp;&nbsp;介：$Data.data.Introduction</h3>
+                </li>
+            </ul>
+
+        </div>
+
+
+        <div class="list-group">
+            <a class="list-group-item active">
+                <h4 class="list-group-item-heading">商品详情</h4>
+                <div class="panel panel-primary">
+                    <p>$Data.data.Details</p>
+                </div>
+            </a>
+        </div>
+
+        <div class="list-group">
+            <a class="list-group-item active">
+                <h4 class="list-group-item-heading">商品评价<span onclick="openpublish($Data.id);">全部评论</span></h4>
+                <div class="panel panel-primary" id="panel">
+                    #foreach($p in $Data.data_2)
+                    <canvas class="can" width="100" height="100" title="$p.Time"></canvas>
+                    <div class="alert alert-info"><p id="$p.ID">$p.username 说：<br />$p.Content<span onclick="Reply($p.ID,$Data.islogin,$Data.id);">回复</span><b class="span">$p.Time</b></p></div>
+                    #end
+                    发表评论：<textarea class="form-control" rows="3" cols="6" onfocus="Publish($Data.islogin);" onblur="notPublish();" onkeyup="TextChange(this);"  id="publish_text" placeholder="登录才能发表评论哦！"></textarea>
+                    <button type="button" id="Publish_btn" class="btn btn-lg btn-primary"  onclick="Publish_click($Data.id)">发表</button>
+                </div>
+            </a>
+        </div>
+ </div>
+        <div id="foot">
+            <p>&copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br />
+                请遵守国家法规</p>
+        </div>
+
+   </div>
+
+    <div id="Coverage" onclick="Close();" >
+       
+    </div>
+    <div id="Reply">
+             
+    </div>
+</body>
+</html>

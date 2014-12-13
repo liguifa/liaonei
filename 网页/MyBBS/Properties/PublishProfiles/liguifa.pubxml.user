@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\贵发\Desktop</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/MyBBS.dll">
+      <publishTime>03/13/2014 16:38:10</publishTime>
+    </File>
+    <File Include="bin/NVelocity.dll">
+      <publishTime>03/06/2014 21:55:04</publishTime>
+    </File>
+    <File Include="CSS/bootstrap-theme.css">
+      <publishTime>03/07/2014 14:15:45</publishTime>
+    </File>
+    <File Include="CSS/bootstrap.css">
+      <publishTime>03/10/2014 20:15:31</publishTime>
+    </File>
+    <File Include="CSS/shop.css">
+      <publishTime>03/12/2014 21:33:15</publishTime>
+    </File>
+    <File Include="detailed.ashx">
+      <publishTime>03/08/2014 11:16:26</publishTime>
+    </File>
+    <File Include="Donated.ashx">
+      <publishTime>03/11/2014 10:08:56</publishTime>
+    </File>
+    <File Include="HTML/detailed.html">
+      <publishTime>03/10/2014 14:01:16</publishTime>
+    </File>
+    <File Include="HTML/Donated.html">
+      <publishTime>03/13/2014 15:58:27</publishTime>
+    </File>
+    <File Include="HTML/Register.html">
+      <publishTime>03/12/2014 20:11:12</publishTime>
+    </File>
+    <File Include="HTML/search.html">
+      <publishTime>03/13/2014 15:58:27</publishTime>
+    </File>
+    <File Include="HTML/shop.html">
+      <publishTime>03/13/2014 15:58:27</publishTime>
+    </File>
+    <File Include="HTML/start.html">
+      <publishTime>03/13/2014 15:32:43</publishTime>
+    </File>
+    <File Include="HTML/test1.html">
+      <publishTime>03/09/2014 18:57:10</publishTime>
+    </File>
+    <File Include="index.ashx">
+      <publishTime>03/06/2014 21:58:55</publishTime>
+    </File>
+    <File Include="index.html">
+      <publishTime>03/12/2014 18:46:36</publishTime>
+    </File>
+    <File Include="NVelocity.dll">
+      <publishTime>03/06/2014 21:55:04</publishTime>
+    </File>
+    <File Include="Register.ashx">
+      <publishTime>03/08/2014 14:12:01</publishTime>
+    </File>
+    <File Include="search.ashx">
+      <publishTime>03/13/2014 14:36:34</publishTime>
+    </File>
+    <File Include="tup/return.png">
+      <publishTime>03/10/2014 12:25:04</publishTime>
+    </File>
+    <File Include="tup/ym.jpg">
+      <publishTime>03/10/2014 20:36:37</publishTime>
+    </File>
+    <File Include="tup/zj.jpg">
+      <publishTime>03/12/2014 19:41:09</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>03/13/2014 16:38:11</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

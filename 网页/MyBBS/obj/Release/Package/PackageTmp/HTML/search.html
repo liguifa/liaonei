@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.css" type="text/css" />
+    <link rel="stylesheet" href="/css/shop.css" type="text/css" />
+    <style>
+        #search {
+            float:right;
+        }
+        .nav_line {
+            margin-top:5px;
+            margin-bottom:7px;
+        }
+        #Screening {
+            height:73px;
+            width:100%;
+            border:solid 2px;
+            color:#96785C;
+            float:left;
+            background:#EFEEEB;
+            margin-bottom:30px;
+        }
+        #Pricerange {
+            margin-top:7px;
+            
+        }
+        .picture {
+            margin-top:20px;
+            margin-bottom:20px;
+        }
+            #Screening > div > strong {
+                float:left;
+            }
+            #Screening > div > ul {
+                list-style:none;
+                float:left;
+            }
+                #Screening > div > ul > li {
+                    float:left;
+                    padding:0px 20px;
+                }
+        #line_2 {
+            color:#96785C;
+            background:#96785C;
+            margin-top:-4px;
+            width:1097px;
+        }
+        #goodsshelf {
+
+            float:left;
+        }
+        #pagenumber {
+            float:right;
+        }
+            #pagenumber > ul {
+                list-style:none;
+                
+            }
+            #pagenumber > ul>li {
+                float:left;
+                width:35px;
+                height:34px;
+                border:solid 2px;
+                color:#DDDDDD;
+                padding:0px;
+                margin:0px;
+                position:relative;
+            }
+                #pagenumber > ul > li > a {
+                   position:absolute;
+                   top:-1px;
+                   left:0px;
+                   width:32px;
+                   height:31px;
+                   text-decoration:none;
+                   text-align:center;
+                }
+                    #pagenumber > ul > li > a:hover {
+                        background:#428BCA;
+                    }
+                    #pagenumber > ul > li > a > strong {
+                        position:absolute;
+                        top:6px;
+                        left:10px;
+                    }
+                #pagenumber > ul > #action >a{
+                    background:#DBC775;
+
+                }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+          
+                var html = document.getElementById("html");
+                var x = screen.width;
+                var y = screen.height;
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            
+            var string = "";
+            var page = document.getElementById("pagenumber");
+            var overleaf = $Data.page + 1;
+            var frontpage = $Data.page - 1;
+            if (frontpage > 0)
+                string = string + "<ul><li><a href='search.ashx?action=$Data.str&search=$Data.search&page=" + frontpage + "'><strong><<</strong></a></li>";
+            else
+                string = string + "<ul>";
+            if ($Data.p1 <= 6) {
+                for (var i = 1; i <= $Data.p1; i++) {
+                    if ($Data.page == i)
+                        string = string + "<li id='action'><a><strong>" + i + "</strong></a></li>";
+                    else
+                        string = string + "<li><a href='search.ashx?action=$Data.str&search=$Data.search&page=" + i + "'><strong>" + i + "</strong></a></li>";
+                }
+            }
+            else {
+                for (var i = $Data.page; i <= $Data.page + 5; i++) {
+                    if ($Data.page == i)
+                        string = string + "<li id='action'><a><strong>" + i + "</strong></a></li>";
+                    else
+                        string = string + "<li><a href='search.ashx?action=$Data.str&search=$Data.search&page=" + i + "'><strong>" + i + "</strong></a></li>";
+                }
+            }
+            if (overleaf <= $Data.p1)
+                string = string + "<li><a href='search.ashx?action=$Data.str&search=$Data.search&page=" + overleaf + "'><strong>>></strong></a></li></ul>";
+            else
+                string = string + "</ul>";
+            page.innerHTML = string;
+
+
+        }
+        function search_a()
+        {
+            var search_text = document.getElementById("search_text"); 
+            var search_btn = document.getElementById("search_btn");
+            var url = "";
+            url = "search.ashx?action=" + search_text.value + "&search=true&page=1";
+            window.open(url);
+        }
+    </script>
+</head>
+<body>
+<div id="html">
+<nav class="navbar navbar-inverse" role="navigation">
+   <ul class="nav nav-pills">
+  <li id="index"><a href="index.ashx"><strong>首页</strong></a></li>
+  <li id="shop" class="active"><a href="index.ashx?action=shop"><strong>商品专区</strong></a></li>
+  <li id="donate"><a href="Donated.ashx"><strong>捐赠专区</strong></a></li>
+#parse("judge.html")
+</ul>
+</nav>
+<div class="jumbotron">
+ <img src="../tup/shop_logo.jpg" />
+</div>
+
+<div id="html_body">
+    <div id="search">
+        <form id="search_form">
+        <input type="text" name="search" id="search_text"  />
+        <a id="search_btn" href="#" onclick="search_a();"><strong>搜一搜</strong></a>
+        </form>
+    </div>
+    <div class="nav_line"><hr style="margin:0px;border:0px;" /></div>
+    <div id="Screening">
+       为你搜索到与<strong>$Data.str</strong>的相关商品$Data.p2件. 
+    </div>
+    <div id="goodsshelf">
+    #foreach($p in $Data.dt)
+    <div class="picture">
+        <img src="$p.SRC"  onerror="javascript:this.src='/tup/Replace.jpg';"/>
+        <h4>$p.Title</h4>
+        <p>￥ $p.Price</p>
+        <a href="detailed.ashx?action=detailed&ID=$p.id">详情</a>
+    </div>
+    #end
+    </div>
+
+    <div id="pagenumber">
+    </div>
+
+</div>
+  <div class="tail">
+    <p>&copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br />请遵守国家法规</p>
+</div>  
+</div>
+</body>
+</html>

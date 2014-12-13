@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>校内淘</title>
+
+
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="/css/bootstrap-theme.css" type="text/css" />
+    <script type="text/javascript" src="../JS/ajax.js"></script>
+    <script>
+        var page = 1;
+        var status_x = true;
+        var status_s = false;
+        window.onload = function ()
+        {
+           
+            if (x > 1366) {
+
+
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            }
+            else {
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = (1366 - x) / 2 + "px";
+                html.style.marginTop = (768 - y) / 2 + "px";
+
+
+            }
+            jt();
+        }
+        function jt()
+        {
+            var div = document.getElementById("row");
+            var left_jt = document.getElementById("left_jt");
+            var right_jt = document.getElementById("right_jt");
+            var left_img = document.getElementById("img_l");
+            var right_img = document.getElementById("img_r");
+            var height = div.offsetHeight;
+            left_jt.style.height = (height - 20) + "px";
+            right_jt.style.height = (height - 20) + "px";
+            left_img.style.height = (height - 20) + "px";
+            right_img.style.height = (height - 20) + "px";
+        }
+        function xianshi(obj)
+        {
+            obj.style.opacity = "1";
+            obj.style.filter = "alpha(opacity=100)";
+        }
+        function yinchang(obj)
+        {
+            obj.style.opacity = "0";
+            obj.style.filter = "alpha(opacity=0)";
+        }
+        function s_page()
+        {
+            if (status_s)
+            {
+                StartAjax("post", "indexPaging.ashx", true, "jp=true&res=s&page=" + page);
+            }
+            else {
+                alert("这是第一页！");
+            }
+        }
+        function x_page()
+        {
+            if (status_x) {
+                StartAjax("post", "indexPaging.ashx", true, "jp=true&res=x&page=" + page);
+            }
+            else
+            {
+                alert("这是最后一页！");
+            }
+        }
+        function CallbackSuccess() {
+            var res = xmlHttpRequest.responseText;
+            var str = eval("(" + res + ")");
+            if (str.res != "OK") {
+                if (str.res == "-1")
+                {
+                    alert("这是第一页！");
+                    status_x = true;
+                    status_s = false;
+                }
+                else if (str.res == "1")
+                {
+                    alert("这是最后一页！");
+                    status_x = false;
+                    status_s = true;
+                }
+                else
+                    alert("系统未知错误！ 请重试...");
+            }
+            else {
+                if (str.tail == "1") {
+                    status_x = false;
+                    status_s = true;
+                }
+                else if (str.tail == "-1") {
+                    status_x =true;
+                    status_s = false;
+                    jt();
+                }
+                else {
+                    status_x = true;
+                    status_s = true;
+                }
+
+                if (str.fs == "x") {
+                    
+                    page++;
+                }
+                else if(str.fs=="s")
+                {
+                    page--;
+
+
+                }
+                var row = document.getElementById("row");
+                var html = "";
+
+                for (var i = 0; i < parseInt(str.datanum) ; i++) {
+                    html = html + "<div class=\"col-sm-6 col-md-4\"><div class=\"thumbnail\"><img src=\"" + str.data[i].src + "\" alt=\"...\" onerror=\"javascript:this.src='/tup/Replace.jpg';\" /><div class=\"caption\"><h3 id=\"price\"><span id=\"span\">￥</span> " + str.data[i].price + "</h3><h3>" + str.data[i].title + "</h3><p>" + str.data[i].introduction + "</p><p><a href=\"detailed.ashx?ID=" + str.data[i].id + "&action=detailed\" class=\"btn btn-primary btn_2\" role=\"button\">详情</a> <a href=\"Review.ashx?ID=" + str.data[i].id + "&pag=1\" class=\"btn btn-default btn_2\" id=\"btn_p\" role=\"button\">评价</a></p></div></div></div>";
+                }
+            }
+            row.innerHTML = html;
+            jt();
+        }
+            
+            
+    </script>
+    <style>
+        body 
+            font-family: "ff-tisa-web-pro-1";
+        }
+
+        .navbar-inverse {
+            background-color: #0F0736;
+        }
+
+        .thumbnail {
+            height: 450px;
+            position: relative;
+        }
+
+        .col-md-4 {
+            width: 33%;
+        }
+
+        .thumbnail > img {
+            height: 282px;
+            width: 100%;
+        }
+
+        .btn-primary {
+            position: absolute;
+            top: 400px;
+        }
+
+        .btn_2 {
+            position: absolute;
+            top: 400px;
+            left: auto;
+        }
+
+        #btn_p {
+            left: 80px;
+        }
+
+        #price {
+            color: red;
+            float: right;
+        }
+
+        #span {
+            font-size: 15px;
+        }
+
+        .row {
+            width: 1100px;
+            margin: auto;
+        }
+
+        .fubiaoti {
+            width: 100%;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        h1, .h1, h2, .h2, h3, .h3, h4, .h4, .lead {
+            font-family: "ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+        }
+
+        p {
+            display: block;
+            -webkit-margin-before: 1em;
+            -webkit-margin-after: 1em;
+            -webkit-margin-start: 0px;
+            -webkit-margin-end: 0px;
+        }
+
+        #jt {
+            position: absolute;
+            top: 310px;
+            height: 10px;
+            width: 1366px;
+            margin: 0px;
+            height: 0px;
+            margin:auto;
+        }
+
+        #left_jt {
+            width: 152px;
+            position: relative;
+            top: 0px;
+            height: 0px;
+            margin-left: 0px;
+            float: left;
+            background: -ms-linear-gradient(left, #fff, #EEEEEE); /* IE */
+            background: -o-linear-gradient(left, #fff, #EEEEEE); /* Opera*/
+            background: -moz-linear-gradient(left,#fff,#EEEEEE); /*firefox*/
+            background: -webkit-gradient(linear, 0% 0%, 100% 0%,from(#fff), to(#EEEEEE)); /*chrome*/
+            filter: alpha(opacity=0);
+            opacity: 0;
+        }
+
+            #left_jt > img {
+                width: 152px;
+            }
+
+        #right_jt {
+            width: 152px;
+            position: relative;
+            top: 0px;
+            height: 0px;
+            float: right;
+            background: -ms-linear-gradient(left, #EEEEEE, #fff); /* IE */
+            background: -o-linear-gradient(left, #EEEEEE, #fff); /* Opera*/
+            background: -moz-linear-gradient(left,#EEEEEE,#fff); /*firefox*/
+            background: -webkit-gradient(linear, 0% 0%, 100% 0%,from(#EEEEEE), to(#fff)); /*chrome*/
+            filter: alpha(opacity=0);
+            opacity: 0;
+            text-align: center;
+        }
+
+            #right_jt > img {
+                width: 152px;
+            }
+    </style>
+</head>
+
+<body>
+    <div id="html">
+        <nav class="navbar navbar-inverse" role="navigation">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="index.ashx"><strong>首页</strong></a></li>
+                <li><a href="index.ashx?action=shop"><strong>商品专区</strong></a></li>
+                <li><a href="Donated.ashx"><strong>捐赠专区</strong></a></li>
+                #parse("judge.html")
+            </ul>
+        </nav>
+        <div class="jumbotron">
+            
+            <img src="../tup/index_logo.jpg" style="margin-left:0px; padding:0px;" />
+        </div>
+
+    
+
+
+    <div class="fubiaoti" style="font-size: xx-large; font-family: 宋体, Arial, Helvetica, sans-serif; font-weight: bold; font-style: normal; color: #000000; top: 0px">
+        <h1>低<strong>C</strong>生活从<strong>卖二手</strong>开始！<br />
+            <strong>二手</strong>改变生活！</h1>
+    </div>
+
+    <div class="row" id="row">
+        #foreach($p in $Data.goods)
+          <div class="col-sm-6 col-md-4">
+              <div class="thumbnail">
+                  <img src="$p.SRC" alt="..." onerror="javascript:this.src='/tup/Replace.jpg';" />
+                  <div class="caption">
+                      <h3 id="price"><span id="span">￥</span> $p.Price</h3>
+                      <h3>$p.Title</h3>
+                      <p>$p.Introduction</p>
+                      <p>
+                          <a href="detailed.ashx?ID=$p.id&action=detailed" class="btn btn-primary btn_2" role="button">详情</a>
+                          <a href="Review.ashx?ID=$p.id&pag=1" class="btn btn-default btn_2" id="btn_p" role="button">评价</a>
+
+                      </p>
+                  </div>
+              </div>
+          </div>
+        #end
+    
+    </div>
+
+    <div class="tail">
+        <p>&copy;2014 XiaoNei 此内容系校内淘用户上传，不代表校内淘赞成被上传的内容或立场<br />
+            请遵守国家法规</p>
+    </div>
+    <div id="jt">
+        <div id="left_jt" onmouseover="xianshi(this);" onmouseout="yinchang(this);" onclick="s_page();">
+            <img src="../tup/right.png" id="img_l" />
+        </div>
+        <div id="right_jt" onmouseover="xianshi(this);" onmouseout="yinchang(this);" onclick="x_page();">
+            <img src="../tup/left.png" id="img_r" />
+        </div>
+
+    </div>
+        </div>
+</body>
+</html>
+

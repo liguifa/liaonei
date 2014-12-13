@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的消息</title>
+    <script type="text/javascript" src="../JS/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../JS/jquery-2.0.0.min.js"></script>
+    <link rel="stylesheet" href="../CSS/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="../CSS/bootstrap-theme.css" type="text/css" />
+    <link rel="Stylesheet" href="../CSS/personal.css" type="text/css" />
+    <script type="text/javascript" src="../JS/ajax.js"></script>
+    <script>
+        window.onload = function () {
+           
+            if (x > 1366) {
+
+
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = "-" + (1366 - x) / 2 + "px";
+                html.style.marginTop = "-" + (768 - y) / 2 + "px";
+            }
+            else {
+                html.style.transform = "scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.cssText = html.style.cssText + ";-webkit-transform:scale(" + x / 1366 + "," + y / 768 + ")";
+                html.style.marginLeft = (1366 - x) / 2 + "px";
+                html.style.marginTop = (768 - y) / 2 + "px";
+
+
+            }
+        }
+    </script>
+    <style>
+        .msg {
+            width: 800px;
+            height: 100px;
+            margin: auto;
+            border: solid 3px #D1DCCE;
+            padding-bottom: 30px;
+            padding: 10px;
+            padding-bottom: 2px;
+            margin-bottom: 20px;
+            position: absolute;
+        }
+
+        .change {
+            margin-bottom: 30px;
+        }
+
+        .outMsg {
+            width: 860px;
+            padding-top: 30px;
+            padding-left: 30px;
+            padding-right: 30px;
+            margin: auto;
+            margin-bottom: 100px;
+        }
+
+        .msgtext {
+            width: 784px;
+            height: 63px;
+            overflow: hidden;
+        }
+
+        #add {
+            width: 265px;
+            margin: auto;
+        }
+
+        .myBtn {
+            width: 96px;
+            height: 46px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body><div id="html" class="bigBox" style="margin:auto">
+    <div class="pageBox">
+        <div class="change">
+            <div class="img">
+                <img id="LOGO" src="../tup/logo.png" alt="..." />
+                <h1 id="H1">个人消息</h1>
+                <h2 id="H3">您好， $Data.Username!</h2>
+            </div>
+            <br />
+            <div id="dh">
+              <ul class="nav nav-tabs dhbg">
+                <li><a href="../index.ashx">首页</a></li>
+                <li><a href="../index.ashx?action=shop">商品专区</a></li>
+                <li><a href="../Donated.ashx">捐赠专区</a></li>
+                <li><a href="../PersonalPage.ashx">个人资料</a></li>
+                <li><a href="../personalPage/personalPage_SH.ashx">发布商品</a></li>
+                <li ><a href="../personalPage/personalGoods.ashx">我的二手</a></li>
+                <li class="active"><a href="../personalPage/persoalMessage.ashx">我的消息</a></li>
+
+            </ul>
+            </div>
+        </div>
+        <div id="FMsg">
+            #foreach($p in $Data.msg)
+                    <div class="outMsg" id="$p.ID">
+                        #if ($p.Status==1)
+                        <div class="msg alert alert-warning">
+                            #else
+                             <div class="msg alert alert-success">
+                                 #end
+                            <div class="msgtext">
+                                <p>$p.Username说：<a href="../Review.ashx?ID=$p.Goods&pag=1&status=0&msgId=$p.ID" onclick="read()">$p.Content</a></p>
+                            </div>
+                                 <p style="color: #989898; position: absolute; bottom: 3px; left: 10px;">回复我的物品:$p.Goods</p>
+                                 <p style="position: absolute; right: 70px; bottom: 3px;">$p.Time</p>
+                                 <div>
+                                     <button class="btn btn-warning" style="position: absolute; right: 3px; bottom: 3px;" onclick='del("$p.ID");'>删除</button>
+                                 </div>
+                             </div>
+                        </div>
+                        #end
+                    </div>
+            <div id="add"></div>
+            <div class="myBtn">
+                <button type="button" id="btn" class="btn btn-info btn-lg btn-block" onclick='addMsg()' value="$Data.pageNum">加载更多</button>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
+<script>
+    var pageNum = 1;
+    var msg = document.getElementsByClassName("msg");
+    if (msg.length == 0) {
+
+        document.getElementById("add").innerHTML = "<h1>您没有任何消息!</h1>";
+
+    }
+    if ($Data.pageCount > 1) {
+
+    }
+    function addMsg() {
+        StartAjax("post", "persoalMessage.ashx", true, "pageNum=" + (pageNum++));
+    }
+    function CallbackSuccess() {
+        var str = xmlHttpRequest.responseText;
+        var string = eval("(" + str + ")");
+        if (string.request == "OK") {
+            var div1 = document.getElementById("FMsg");
+            //pageNum = string.pageNum;
+            var msgNum = string.num;
+            var html = "";
+
+
+            for (var i = 0; i < msgNum; i++) {
+                if (string.table[i].status == "0") {
+                    html = html + "<div class=\"outMsg\"><div class=\"msg alert alert-success\"><div class=\"msgtext\"><p>" + string.table[i].Username + "说：<a href=\"../Review.ashx?ID=" + string.table[i].GoodsId + "&pag=1 & status=0&msgId=" + string.table[i].msgId + "\"\">" + string.table[i].Content + "</a></p></div><p style=\"color: #989898; position:absolute;bottom:3px;left:10px;\">回复我的物品:" + string.table[i].Goods + "</p><p style=\"position:absolute;right:70px;bottom:3px;\">" + string.table[i].time + "</p><div><button class=\"btn btn-warning\" style=\"position:absolute;right:3px;bottom:3px;\" onclick='del(" + string.table[i].msgId + ")'>删除</button></div></div></div>";
+                }
+                else {
+                    html = html + "<div class=\"outMsg\"><div class=\"msg alert alert-warning\"><div class=\"msgtext\"><p>" + string.table[i].Username + "说：<a href=\"../Review.ashx?ID=" + string.table[i].GoodsId + "&pag=1&status=0&msgId=" + string.table[i].msgId + "\"\">" + string.table[i].Content + "</a></p></div><p style=\"color: #989898; position:absolute;bottom:3px;left:10px;\">回复我的物品:" + string.table[i].Goods + "</p><p style=\"position:absolute;right:70px;bottom:3px;\">" + string.table[i].time + "</p><div><button class=\"btn btn-warning\" style=\"position:absolute;right:3px;bottom:3px;\" onclick='del(" + string.table[i].msgId + ")'>删除</button></div></div></div>";
+                }
+            }
+            if (parseInt(msgNum) < 10) {
+                document.getElementById("btn").style.display = "none";
+            }
+            div1.innerHTML = div1.innerHTML + html;
+
+        }
+        else if (string.back =="ok") {
+            var list = document.getElementById("FMsg");
+            list.removeChild(document.getElementById(msgId));
+            alert("删除成功！");
+
+        }
+        else if (string.back == "no") {
+
+        }
+        else {
+            document.getElementById("btn").style.display = "none";
+            alert("没有更多消息！");
+
+
+        }
+     
+
+        function read() {
+            var link = document.getElementsByClassName("link");
+
+        }
+
+
+    }   var msgId = null;
+    function del(id) {
+        var isdel = confirm("确定要删除吗？");
+        if (isdel) {
+            StartAjax("post", "persoalMessage.ashx", true, "isDel=true&msgId="+id);
+            msgId = id;
+        }
+
+    }
+</script>
+
